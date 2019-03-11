@@ -14,8 +14,14 @@ const ngrok =
 const { resolve } = require('path');
 const app = express();
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json({ limit: '300mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '300mb', extended: false }));
+
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
+const list = require('./list');
+app.use('/api/list', list);
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {

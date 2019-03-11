@@ -3,16 +3,21 @@
  */
 
 import { combineReducers } from 'redux-immutable';
+import { reducer as notifReducer } from 'redux-notifications';
+
 import { connectRouter } from 'connected-react-router/immutable';
 
 import history from 'utils/history';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import listReducer from 'containers/List/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
  */
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
+    list: listReducer,
+    notifs: notifReducer,
     language: languageProviderReducer,
     ...injectedReducers,
   });
